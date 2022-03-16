@@ -18,17 +18,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 
 
 Route::group(['prefix'=>'admin','middleware'=>['admin:admin']],function(){
-
-Route::get('login/',[AdminController::class,'loginform']);
-Route::post('login/',[AdminController::class,'store'])->name('admin.login');
+    Route::get('/login',[AdminController::class,'loginform']);
+    Route::post('/login',[AdminController::class,'store'])->name('admin.login');
 });
 
-Route::middleware(['auth:sanctum,admin', 'verified'])->get('admin/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+
+
+//Admin Routes
+
+    Route::get('admin/logout',[AdminController::class,'destroy'])->name('admin.logout');
+
+
 
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

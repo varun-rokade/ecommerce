@@ -1,7 +1,8 @@
 <?php
-namespace App\Gurads;
+namespace App\Guards;
 // namespace Illuminate\Contracts\Auth;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Guard;
 
 interface AdminStatefulGuard extends Guard
 {
